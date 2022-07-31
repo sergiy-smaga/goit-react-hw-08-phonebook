@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export class ListElement extends Component {
@@ -14,6 +15,16 @@ export class ListElement extends Component {
     );
   }
 }
+
+ListElement.propTypes = {
+  delete: PropTypes.func.isRequired,
+  key: PropTypes.string.isRequired,
+  contact: PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }),
+};
 
 const StyledLi = styled.li`
   display: flex;

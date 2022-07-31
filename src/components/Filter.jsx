@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 
@@ -20,6 +21,11 @@ export class Filter extends Component {
     );
   }
 }
+
+Filter.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
 
 const StyledFilterDiv = styled.div`
   display: flex;
