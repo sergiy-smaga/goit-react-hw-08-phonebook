@@ -1,10 +1,11 @@
 import { Component } from 'react';
-import styled from 'styled-components';
-
+import { StyledApp } from './StyledApp';
 import { nanoid } from 'nanoid';
-import { ContactForm } from './Form';
-import { Filter } from './Filter';
-import { ContactList } from './ContactList';
+import { ContactForm } from '../Form/Form';
+import { Filter } from '../Filter/Filter';
+import { ContactList } from '../ContactList/ContactList';
+
+const LS_KEY = 'contacts';
 
 export class App extends Component {
   state = {
@@ -15,6 +16,17 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+  };
+
+  componentDidMount = () => {
+    const contactsParsed = JSON.parse(localStorage.getItem(LS_KEY));
+    contactsParsed && this.setState({ contacts: contactsParsed });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem(LS_KEY, JSON.stringify(this.state.contacts));
+    }
   };
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -34,9 +46,9 @@ export class App extends Component {
         });
   };
 
-  deleteContact = name => {
+  deleteContact = id => {
     this.setState({
-      contacts: this.state.contacts.filter(contact => contact.name !== name),
+      contacts: this.state.contacts.filter(contact => contact.id !== id),
     });
   };
 
@@ -50,20 +62,9 @@ export class App extends Component {
         <ContactList
           items={this.state.contacts}
           filter={this.state.filter}
-          delete={this.deleteContact}
+          deleter={this.deleteContact}
         />
       </StyledApp>
     );
   }
 }
-
-const StyledApp = styled.div`
-  display: block;
-  border-radius: 10px;
-  max-width: 500px;
-  font-size: 24px;
-  color: #010101;
-  background-color: lightcoral;
-  margin: 50px auto;
-  padding: 15px;
-`;
