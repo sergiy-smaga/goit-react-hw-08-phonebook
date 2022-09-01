@@ -1,18 +1,23 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { StyledForm } from './StyledForm';
+import useItemsSlice from 'redux/itemsSlice/itemsHook';
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
   const nameId = nanoid();
   const numberId = nanoid();
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const { items, addItem } = useItemsSlice();
+
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
+    const alreadyAdded = items.some(obj => obj.name === name);
+    alreadyAdded
+      ? alert(`Contact ${name} has already added`)
+      : addItem({ name, number });
     setName('');
     setNumber('');
   };
@@ -58,8 +63,4 @@ export const ContactForm = ({ onSubmit }) => {
       <button type="submit">Add contact</button>
     </StyledForm>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };

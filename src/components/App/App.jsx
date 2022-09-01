@@ -14,40 +14,17 @@ const testingContactsList = [
 ];
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(localStorage.getItem(LS_KEY)) ?? testingContactsList;
-  });
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem(LS_KEY, JSON.stringify(contacts));
-  }, [contacts]);
-
-  const handleFormData = data => {
-    const alreadyAdded = contacts.some(obj => obj.name === data.name);
-    alreadyAdded
-      ? alert(`Contact ${data.name} has already added`)
-      : setContacts(prevContacts => [
-          ...prevContacts,
-          { name: data.name, number: data.number, id: nanoid() },
-        ]);
-  };
-
   const handleChange = e => setFilter(e.target.value);
-
-  const deleteContact = id => {
-    setContacts(prevContacts =>
-      prevContacts.filter(contact => contact.id !== id)
-    );
-  };
 
   return (
     <StyledApp>
       <h1>Phone book</h1>
-      <ContactForm onSubmit={handleFormData} />
+      <ContactForm />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={handleChange} />
-      <ContactList items={contacts} filter={filter} deleter={deleteContact} />
+      <ContactList filter={filter} />
     </StyledApp>
   );
 };

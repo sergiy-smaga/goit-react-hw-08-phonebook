@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import { ListElement } from '../ListElement/ListElement';
+import useItemsSlice from 'redux/itemsSlice/itemsHook';
 
-export const ContactList = ({ items, filter, deleter }) => {
+export const ContactList = ({ filter }) => {
+  const { items } = useItemsSlice();
+
   return (
     <ul>
       {items
@@ -9,20 +12,12 @@ export const ContactList = ({ items, filter, deleter }) => {
           item.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
         )
         .map(contact => (
-          <ListElement deleter={deleter} key={contact.id} contact={contact} />
+          <ListElement key={contact.id} contact={contact} />
         ))}
     </ul>
   );
 };
 
 ContactList.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
   filter: PropTypes.string.isRequired,
-  deleter: PropTypes.func.isRequired,
 };
