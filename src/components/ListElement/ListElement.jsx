@@ -1,25 +1,28 @@
 import PropTypes from 'prop-types';
 import { StyledLi } from './StyledListElement';
-import useItemsSlice from 'redux/itemsSlice/itemsHook';
+import { useDeleteItemMutation } from 'redux/itemsSlice/itemsSlice';
 
 export const ListElement = ({ contact }) => {
-  const { name, number, id } = contact;
-  const { deleteItem } = useItemsSlice();
+  const { name, phone, id } = contact;
+
+  const [deleteItem, { isLoading }] = useDeleteItemMutation();
 
   return (
     <StyledLi>
       <p>
-        {name} : {number}
+        {name} : {phone}
       </p>
-      <button onClick={() => deleteItem(id)}>delete</button>
+      <button disabled={isLoading} onClick={() => deleteItem(id)}>
+        {isLoading ? '...Удаляю' : 'Удалить'}
+      </button>
     </StyledLi>
   );
 };
 
 ListElement.propTypes = {
-  contact: PropTypes.exact({
+  contact: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
   }),
 };

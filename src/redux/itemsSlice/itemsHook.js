@@ -1,25 +1,26 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem, deleteItem } from './itemsSlice';
+import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
+import { useGetItemsQuery } from 'redux/itemsSlice/itemsSlice';
 
-const getItems = state => state.contacts.items;
-const getFilteredItems = ({ contacts }) => {
-  const { items, filter } = contacts;
-  return items.filter(item =>
-    item.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
-  );
-};
 const useItemsSlice = () => {
-  const dispatch = useDispatch();
-  const items = useSelector(getItems);
-  const filteredItems = useSelector(getFilteredItems);
-  const handleAddItem = data => dispatch(addItem(data));
-  const handleDeleteItem = id => dispatch(deleteItem(id));
-  return {
-    filteredItems,
-    items,
-    addItem: handleAddItem,
-    deleteItem: handleDeleteItem,
-  };
+  const filter = useSelector(state => state.filter.toLowerCase());
+
+  const selectFilteredItems = createSelector(
+    [response => response.data, (_, filter) => filter],
+    (items, filter) => {
+      return (
+        items?.filter(item => item.name.toLowerCase().includes(filter)) ?? []
+      );
+    }
+  );
+  return useGetItemsQuery(undefined, {
+    selectFromResult(result) {
+      return {
+        ...result,
+        filteredItems: selectFilteredItems(result, filter),
+      };
+    },
+  });
 };
 
 export default useItemsSlice;

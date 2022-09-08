@@ -13,6 +13,7 @@ export const StyledLi = styled.li`
     background-color: #e5dcc3;
   }
   button {
+    width: 90px;
     display: block;
     padding: 10px;
     border-radius: 5px;
@@ -25,6 +26,11 @@ export const StyledLi = styled.li`
       border: 1px solid #000;
       background-color: #e5dcc3;
       color: #9a9483;
+    }
+    :disabled {
+      border: 1px solid #000;
+      background-color: #fff;
+      color: #eee;
     }
   }
 `;
