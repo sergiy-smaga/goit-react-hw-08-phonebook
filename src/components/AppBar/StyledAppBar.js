@@ -4,6 +4,10 @@ export const Container = styled.div`
   max-width: 960px;
   margin: 0 auto;
   padding: 0 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  letter-spacing: 0.01em;
   header {
     display: flex;
     align-items: center;
