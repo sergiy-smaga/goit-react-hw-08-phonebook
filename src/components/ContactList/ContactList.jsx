@@ -1,11 +1,9 @@
 import { ListElement } from '../ListElement/ListElement';
 import useItemsSlice from 'redux/itemsSlice/itemsHook';
 import { StyledList } from './StyledContactList';
-// import { useAuth } from 'redux/auth/auth-selectors';
 
 export const ContactList = () => {
   const { filteredItems, error, isLoading } = useItemsSlice();
-  // const { isLoggedIn } = useAuth();
 
   return (
     <>
