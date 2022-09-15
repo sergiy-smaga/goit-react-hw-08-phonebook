@@ -7,7 +7,7 @@ import {
 
 export const ContactForm = () => {
   const nameId = nanoid();
-  const phoneId = nanoid();
+  const numberId = nanoid();
 
   const { data: items } = useGetItemsQuery();
   const [addItem] = useAddItemMutation();
@@ -15,11 +15,11 @@ export const ContactForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const form = e.target;
-    const { name, phone } = form.elements;
+    const { name, number } = form.elements;
     const alreadyAdded = await items.some(obj => obj.name === name.value);
     alreadyAdded
       ? alert(`Contact ${name} has already added`)
-      : await addItem({ name: name.value, phone: phone.value });
+      : await addItem({ name: name.value, number: number.value });
     form.reset();
   };
 
@@ -37,11 +37,11 @@ export const ContactForm = () => {
         />
       </div>
       <div>
-        <label htmlFor={phoneId}>Number</label>
+        <label htmlFor={numberId}>Number</label>
         <input
-          id={phoneId}
+          id={numberId}
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
