@@ -5,6 +5,9 @@ import {
   useGetItemsQuery,
 } from 'redux/itemsSlice/itemsSlice';
 
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import Button from '@mui/material/Button';
+
 export const ContactForm = () => {
   const nameId = nanoid();
   const numberId = nanoid();
@@ -48,7 +51,9 @@ export const ContactForm = () => {
         />
       </div>
 
-      <button type="submit">Add contact</button>
+      <Button variant="outlined" startIcon={<PersonAddIcon />} type="submit">
+        Add contact
+      </Button>
     </StyledForm>
   );
 };

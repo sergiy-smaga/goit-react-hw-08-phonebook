@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
   max-width: 960px;
@@ -21,34 +22,19 @@ export const Container = styled.div`
       gap: 10px;
     }
   }
-
-  button {
-    padding: 8px 16px;
-    border-radius: 4px;
-    color: black;
-    font-weight: 700;
-    transition: 300ms ease;
-    background-color: #bbb;
-    border: 1px solid #bbb;
-    cursor: pointer;
+`;
+export const StyledLink = styled(NavLink)`
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: 300ms ease;
+  &:hover {
+    background-color: #e5dcc3;
   }
-  button:hover {
-    background-color: #ddd;
-    border: 1px solid #ddd;
-  }
-  a {
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-    transition: 300ms ease;
-  }
-  a:hover {
-    background-color: #ddd;
-  }
-  a:active {
+  &.active {
     color: white;
-    background-color: #bbb;
+    background-color: #9a9483;
   }
 `;

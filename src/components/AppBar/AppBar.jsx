@@ -1,8 +1,8 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import UserMenu from '../UserMenu/UserMenu';
 import { useAuth } from 'redux/auth/auth-selectors';
 import { Suspense } from 'react';
-import { Container } from './StyledAppBar';
+import { Container, StyledLink } from './StyledAppBar';
 
 export default function AppBar() {
   const { isLoggedIn } = useAuth();
@@ -10,16 +10,17 @@ export default function AppBar() {
     <Container>
       <header>
         <nav>
-          <NavLink to="/">Main Page</NavLink>
           {isLoggedIn ? (
             <>
-              <NavLink to="/contacts">Contact List</NavLink>
+              <StyledLink to="/">Main Page</StyledLink>
+              <StyledLink to="/contacts">Contact List</StyledLink>
               <UserMenu />
             </>
           ) : (
             <>
-              <NavLink to="/register">Registration</NavLink>
-              <NavLink to="/login">LogIn</NavLink>
+              <StyledLink to="/">Main Page</StyledLink>
+              <StyledLink to="/register">Registration</StyledLink>
+              <StyledLink to="/login">LogIn</StyledLink>
             </>
           )}
         </nav>

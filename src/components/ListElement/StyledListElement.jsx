@@ -13,10 +13,10 @@ export const StyledLi = styled.li`
     background-color: #e5dcc3;
   }
   button {
-    width: 90px;
+    /* width: 90px;
     display: block;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 5px; */
     border: 1px solid #9a9483;
     background-color: #9a9483;
     color: #e5dcc3;

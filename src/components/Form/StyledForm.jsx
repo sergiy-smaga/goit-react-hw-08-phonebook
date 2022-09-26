@@ -32,9 +32,9 @@ export const StyledForm = styled.form`
     }
   }
   button {
-    display: block;
+    /* display: block;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 5px; */
     border: 1px solid #9a9483;
     background-color: #9a9483;
     color: #e5dcc3;

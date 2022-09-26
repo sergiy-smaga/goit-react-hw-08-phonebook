@@ -2,6 +2,10 @@ import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/auth-operations';
 import { useAuth } from 'redux/auth/auth-selectors';
 
+import { StyledDiv } from './StyledUserMenu';
+import IconButton from '@mui/material/IconButton';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
 export default function UserMenu() {
   const { user } = useAuth();
   const dispatch = useDispatch();
@@ -11,11 +15,11 @@ export default function UserMenu() {
   };
 
   return (
-    <div>
+    <StyledDiv>
       <p>Welcome, {user.name}</p>
-      <button type="button" onClick={handleClick}>
-        Log Out
-      </button>
-    </div>
+      <IconButton type="button" onClick={handleClick}>
+        <ExitToAppIcon />
+      </IconButton>
+    </StyledDiv>
   );
 }
