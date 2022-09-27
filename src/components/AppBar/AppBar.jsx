@@ -12,13 +12,17 @@ export default function AppBar() {
         <nav>
           {isLoggedIn ? (
             <>
-              <StyledLink to="/">Main Page</StyledLink>
+              <StyledLink to="/" end>
+                Main Page
+              </StyledLink>
               <StyledLink to="/contacts">Contact List</StyledLink>
               <UserMenu />
             </>
           ) : (
             <>
-              <StyledLink to="/">Main Page</StyledLink>
+              <StyledLink to="/" end>
+                Main Page
+              </StyledLink>
               <StyledLink to="/register">Registration</StyledLink>
               <StyledLink to="/login">LogIn</StyledLink>
             </>
